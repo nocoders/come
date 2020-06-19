@@ -4,7 +4,6 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +19,15 @@ import java.util.List;
 */
 public class FileUtils {
 
-    public static  List<Integer> getArrayfromFile(String filePath) throws Exception {
+    public static Integer[] getArrayfromFile(String filePath) throws Exception {
         List<Integer> res = new ArrayList<>(1024);
         String data;
         BufferedReader inputStream = new BufferedReader(new InputStreamReader(new FileInputStream(ResourceUtils.getFile("classpath:"+filePath))));
         while ((data = inputStream.readLine())!=null){
             res.add(Integer.parseInt(data));
         }
-        return res;
+        int[] result = new int[res.size()];
+        return (Integer[])res.toArray();
     }
 
 }
