@@ -148,8 +148,12 @@ public final class StdRandom {
      * @throws IllegalArgumentException if {@code b - a >= Integer.MAX_VALUE}
      */
     public static int uniform(int a, int b) {
-        if (b <= a) throw new IllegalArgumentException("Invalid range");
-        if ((long) b - a >= Integer.MAX_VALUE) throw new IllegalArgumentException("Invalid range");
+        if (b <= a) {
+            throw new IllegalArgumentException("Invalid range");
+        }
+        if ((long) b - a >= Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("Invalid range");
+        }
         return a + uniform(b - a);
     }
 
@@ -162,7 +166,9 @@ public final class StdRandom {
      * @throws IllegalArgumentException unless {@code a < b}
      */
     public static double uniform(double a, double b) {
-        if (!(a < b)) throw new IllegalArgumentException("Invalid range");
+        if (!(a < b)) {
+            throw new IllegalArgumentException("Invalid range");
+        }
         return a + uniform() * (b-a);
     }
 
@@ -176,8 +182,9 @@ public final class StdRandom {
      * @throws IllegalArgumentException unless {@code p >= 0.0} and {@code p <= 1.0}
      */
     public static boolean bernoulli(double p) {
-        if (!(p >= 0.0 && p <= 1.0))
+        if (!(p >= 0.0 && p <= 1.0)) {
             throw new IllegalArgumentException("Probability must be between 0.0 and 1.0");
+        }
         return uniform() < p;
     }
 
@@ -250,10 +257,12 @@ public final class StdRandom {
      * @throws IllegalArgumentException unless {@code lambda > 0.0} and not infinite
      */
     public static int poisson(double lambda) {
-        if (!(lambda > 0.0))
+        if (!(lambda > 0.0)) {
             throw new IllegalArgumentException("Parameter lambda must be positive");
-        if (Double.isInfinite(lambda))
+        }
+        if (Double.isInfinite(lambda)) {
             throw new IllegalArgumentException("Parameter lambda must not be infinite");
+        }
         // using algorithm given by Knuth
         // see http://en.wikipedia.org/wiki/Poisson_distribution
         int k = 0;
@@ -310,16 +319,20 @@ public final class StdRandom {
      * @throws IllegalArgumentException unless {@code probabilities[i] >= 0.0} for each index {@code i}
      */
     public static int discrete(double[] probabilities) {
-        if (probabilities == null) throw new NullPointerException("argument array is null");
+        if (probabilities == null) {
+            throw new NullPointerException("argument array is null");
+        }
         double EPSILON = 1E-14;
         double sum = 0.0;
         for (int i = 0; i < probabilities.length; i++) {
-            if (!(probabilities[i] >= 0.0))
+            if (!(probabilities[i] >= 0.0)) {
                 throw new IllegalArgumentException("array entry " + i + " must be nonnegative: " + probabilities[i]);
+            }
             sum += probabilities[i];
         }
-        if (sum > 1.0 + EPSILON || sum < 1.0 - EPSILON)
+        if (sum > 1.0 + EPSILON || sum < 1.0 - EPSILON) {
             throw new IllegalArgumentException("sum of array entries does not approximately equal 1.0: " + sum);
+        }
 
         // the for loop may not return a value when both r is (nearly) 1.0 and when the
         // cumulative sum is less than 1.0 (as a result of floating-point roundoff error)
@@ -328,7 +341,9 @@ public final class StdRandom {
             sum = 0.0;
             for (int i = 0; i < probabilities.length; i++) {
                 sum = sum + probabilities[i];
-                if (sum > r) return i;
+                if (sum > r) {
+                    return i;
+                }
             }
         }
     }
@@ -345,24 +360,31 @@ public final class StdRandom {
      * @throws IllegalArgumentException if sum of frequencies exceeds {@code Integer.MAX_VALUE} (2<sup>31</sup> - 1)
      */
     public static int discrete(int[] frequencies) {
-        if (frequencies == null) throw new NullPointerException("argument array is null");
+        if (frequencies == null) {
+            throw new NullPointerException("argument array is null");
+        }
         long sum = 0;
         for (int i = 0; i < frequencies.length; i++) {
-            if (frequencies[i] < 0)
+            if (frequencies[i] < 0) {
                 throw new IllegalArgumentException("array entry " + i + " must be nonnegative: " + frequencies[i]);
+            }
             sum += frequencies[i];
         }
-        if (sum == 0)
+        if (sum == 0) {
             throw new IllegalArgumentException("at least one array entry must be positive");
-        if (sum >= Integer.MAX_VALUE)
+        }
+        if (sum >= Integer.MAX_VALUE) {
             throw new IllegalArgumentException("sum of frequencies overflows an int");
+        }
 
         // pick index i with probabilitity proportional to frequency
         double r = uniform((int) sum);
         sum = 0;
         for (int i = 0; i < frequencies.length; i++) {
             sum += frequencies[i];
-            if (sum > r) return i;
+            if (sum > r) {
+                return i;
+            }
         }
 
         // can't reach here
@@ -392,7 +414,9 @@ public final class StdRandom {
      * @throws NullPointerException if {@code a} is {@code null}
      */
     public static void shuffle(Object[] a) {
-        if (a == null) throw new NullPointerException("argument array is null");
+        if (a == null) {
+            throw new NullPointerException("argument array is null");
+        }
         int n = a.length;
         for (int i = 0; i < n; i++) {
             int r = i + uniform(n-i);     // between i and n-1
@@ -511,7 +535,9 @@ public final class StdRandom {
      */
     public static void main(String[] args) {
         int n = Integer.parseInt(args[0]);
-        if (args.length == 2) StdRandom.setSeed(Long.parseLong(args[1]));
+        if (args.length == 2) {
+            StdRandom.setSeed(Long.parseLong(args[1]));
+        }
         double[] probabilities = { 0.5, 0.3, 0.1, 0.1 };
         int[] frequencies = { 5, 3, 1, 1 };
         String[] a = "A B C D E F G".split(" ");
@@ -525,8 +551,9 @@ public final class StdRandom {
             StdOut.printf("%1d ",   discrete(probabilities));
             StdOut.printf("%1d ",   discrete(frequencies));
             StdRandom.shuffle(a);
-            for (String s : a)
+            for (String s : a) {
                 StdOut.print(s);
+            }
             StdOut.println();
         }
     }
