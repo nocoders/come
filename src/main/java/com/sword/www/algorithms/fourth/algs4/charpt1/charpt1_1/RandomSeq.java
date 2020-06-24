@@ -1,4 +1,4 @@
-package com.sword.www.algorithms.fourth.algs4.charpt1_1;
+package com.sword.www.algorithms.fourth.algs4.charpt1.charpt1_1;
 
 import com.sword.www.algorithms.fourth.algs4.util.StdOut;
 import com.sword.www.algorithms.fourth.algs4.util.StdRandom;

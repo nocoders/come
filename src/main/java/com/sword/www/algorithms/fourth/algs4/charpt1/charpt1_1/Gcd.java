@@ -1,4 +1,4 @@
-package com.sword.www.algorithms.fourth.algs4.charpt1_1;
+package com.sword.www.algorithms.fourth.algs4.charpt1.charpt1_1;
 /**
 * @Description:    递归求最大公约数
 * @Author:         linmeng
