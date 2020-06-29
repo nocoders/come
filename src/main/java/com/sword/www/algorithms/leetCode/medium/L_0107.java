@@ -11,7 +11,41 @@ package com.sword.www.algorithms.leetCode.medium;
  */
 public class L_0107 {
 
-    public void rotate(int[][] matrix) {
-
+    public static void main(String[] args) {
+        int [] [] mar = {{1,2,3},{4,5,6},{7,8,9}};
+        rotate(mar);
+        System.out.printf("");
+    }
+    /**
+     * 先用右斜线将左下跟右上进行交换，然后在将左边跟右边进行交换
+     * @param matrix 传入数组
+     * @author linmeng
+     * @date 2020/6/29 15:27
+     * @return void
+     */
+    public static void rotate(int[][] matrix) {
+        if (matrix==null){
+            return;
+        }
+        int row = matrix.length;
+        int line = matrix[0].length;
+        if (row != line){
+            return;
+        }
+        int swap;
+        for (int i = 0; i < row; i++) {
+            for (int j = i+1; j < line; j++) {
+                swap = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = swap;
+            }
+        }
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < line/2; j++) {
+                swap = matrix[i][j];
+                matrix[i][j] = matrix[i][line-j-1];
+                matrix[i][line-j-1] = swap;
+            }
+        }
     }
 }
