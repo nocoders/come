@@ -9,7 +9,10 @@ package com.sword.www.algorithms.fourth.algs4.bean;
 * @Version:        1.0
 */
 public enum SortEnum {
-    SELECT,
+    /**插入排序*/
     INSERT,
+    /**选择排序*/
+    SELECT,
+    /**希尔排序*/
     SHELL;
 }
