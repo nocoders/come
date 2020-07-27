@@ -13,24 +13,16 @@ public class L_5 {
     public static void main(String[] args) {
 //        System.out.println("123".substring(0,1));
 //        System.out.println("123".substring(1,2));
-        System.out.println(getBeforeStr(0,4,"12345"));
-        System.out.println(getAfterStr(0,4,"12345"));
     }
-    public void longestPalindrome(String s) {
+    /**
+     * 暴力破解
+     *
+     * @param s
+     * @author linmeng
+     * @date 2020/7/27 17:19
+     * @return void
+     */
+    public void longestPalindrome1(String s) {
         int length = s.length();
-        String res = "";
-        for (int i = 0; i<length-1; i++) {
-            int j = i+1;
-            while (j<length){
-//                if (s.substring(i,(i+j)/2))
-            }
-        }
-    }
-    public static String getBeforeStr(int i,int j,String str){
-        return str.substring(i,(i+j+1)/2);
-    }
-
-    public static String getAfterStr(int i,int j,String str){
-        return str.substring((i+j+1)/2,j)+str.charAt(j);
     }
 }
