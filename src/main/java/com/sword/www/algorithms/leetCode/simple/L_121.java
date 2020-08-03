@@ -22,7 +22,7 @@ public class L_121 {
      * @date 2020/8/2 11:11
      * @return int
      */
-    public int maxProfit(int[] prices) {
+    public static int maxProfit(int[] prices) {
         if (prices == null ||  prices.length ==0){
             return 0;
         }
