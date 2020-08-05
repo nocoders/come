@@ -1,9 +1,8 @@
 package com.sword.www.algorithms.leetCode.simple;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -32,12 +31,10 @@ public class L_349 {
      * @return int[]
      */
     public static int[] intersection(int[] nums1, int[] nums2) {
-        int len;
-        if (nums1 == null || nums2 == null || (len = nums1.length) == 0 || nums2.length == 0){
+        if (nums1 == null || nums2 == null || nums1.length == 0 || nums2.length == 0){
             return new int[0];
         }
-        HashSet<Integer> set = new HashSet<>(len);
-        Arrays.stream(nums1).forEach(set::add);
+        Set<Integer> set = Arrays.stream(nums1).boxed().collect(Collectors.toSet());
 
         return Arrays.stream(nums2).filter(set::contains).distinct().toArray();
     }
