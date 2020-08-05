@@ -2,9 +2,7 @@ package com.sword.www.algorithms.leetCode.simple;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 两个数组的交集 II
