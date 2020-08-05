@@ -1,7 +1,10 @@
 package com.sword.www.algorithms.leetCode.simple;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 两个数组的交集 II
@@ -19,14 +22,39 @@ import java.util.HashSet;
  */
 public class L_350 {
 
+    public static void main(String[] args) {
+        int []nums1 = {1,2,2,1},nums2 = {2,2};
+        int[] intersect = intersect(nums1, nums2);
+        System.out.println();
+    }
     /**
-     *
+     * [1,2,2,1]
+     * [2,2]
+     * 将两个数组中的长度较短 的数组存入map，map里面数组元素为key，数组数量为value。
+     * 遍历另一数组，若map中该元素数量大于0则保存 到返回数组中，并把map中该元素数量减一。
      * @param nums1
      * @param nums2
      * @author linmeng
      * @date 2020/8/5 9:30
      * @return int[]
      */
-    public int[] intersect(int[] nums1, int[] nums2) {
+    public static int[] intersect(int[] nums1, int[] nums2) {
+        if (nums1.length>nums2.length){
+           return intersect(nums2,nums1);
+        }else {
+            int len1 = nums1.length, len2 =  nums2.length,v,index = 0;
+            Map<Integer, Integer> map = new HashMap<>(len1);
+            for (int i : nums1) {
+                map.put(i,map.getOrDefault(i,0)+1);
+            }
+            int[] res = new int[len2];
+            for (int i : nums2) {
+                if ((v = map.getOrDefault(i,0))>0){
+                    map.put(i,v-1);
+                    res[index++] = i;
+                }
+            }
+            return Arrays.copyOfRange(res,0,index);
+        }
     }
 }
