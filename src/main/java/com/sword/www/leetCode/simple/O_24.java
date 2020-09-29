@@ -21,14 +21,15 @@ import com.sword.www.leetCode.bean.ListNode;
 public class O_24 {
 
     public static ListNode reverseList(ListNode head) {
-        ListNode result = new ListNode(head.val);
-        ListNode tmp = head.next,node = head.next;
-        while (node !=null){
-            node=node.next;
-            tmp.next=result;
-            result=tmp.next;
+        ListNode pre = null,cur = head;
+
+        while (cur !=null){
+            ListNode tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
         }
-        return result;
+        return pre;
     }
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
