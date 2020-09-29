@@ -24,8 +24,9 @@ package com.sword.www.leetCode.medium;
  */
 public class L_19 {
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode first = head,second = head;
-        // 这个n+1很精髓，因为下面的while循环是多跑一下，second==null的时候就是已经跑到链表外面去了，正好跟现在这个多跑的一次抵消
+        ListNode dummy = new ListNode(0);
+        dummy.next=head;
+        ListNode first = dummy,second = dummy;
         for (int i = 1; i <= n+1; i++) {
             second = second.next;
         }
@@ -34,7 +35,7 @@ public class L_19 {
             second = second.next;
         }
         first.next = first.next.next;
-        return head;
+        return dummy.next;
     }
     public class ListNode {
         int val;
