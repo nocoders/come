@@ -1,5 +1,7 @@
 package com.sword.www.leetCode.medium;
 
+import com.sword.www.leetCode.bean.ListNode;
+
 /**
  * 删除链表的倒数第N个节点
  * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
@@ -36,11 +38,6 @@ public class L_19 {
         }
         first.next = first.next.next;
         return dummy.next;
-    }
-    public class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
     }
 }
 

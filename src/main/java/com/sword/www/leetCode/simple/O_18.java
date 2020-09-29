@@ -1,5 +1,7 @@
 package com.sword.www.leetCode.simple;
 
+import com.sword.www.leetCode.bean.ListNode;
+
 /**
  * 剑指 Offer 18. 删除链表的节点
  * 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
@@ -30,22 +32,6 @@ package com.sword.www.leetCode.simple;
  * @date 20/8/2020 上午10:04
  */
 public class O_18 {
-
-    /**
-     * 链表
-     * @author linmeng
-     * @date 20/8/2020 上午10:06
-     * @return
-     */
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-
-    }
     /**
      * 根据链表头，要删除的值 遍历链表，进行 删除
      * @param head
