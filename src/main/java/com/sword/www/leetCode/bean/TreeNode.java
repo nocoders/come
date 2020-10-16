@@ -18,6 +18,9 @@ public class TreeNode {
         TreeNode tn = null;
         if (index < arrays.length){
             Integer value = arrays[index];
+            if (value == null){
+                return null;
+            }
             tn = new TreeNode(value);
             tn.left = arrayTransferToNode(arrays,2*index+1);
             tn.right = arrayTransferToNode(arrays,2*index+2);
