@@ -9,7 +9,7 @@ package com.sword.www.leetCode.bean;
  */
 public class TreeNode {
 
-    public Integer val;
+    public int val;
     public TreeNode left;
     public TreeNode right;
     TreeNode(Integer x) { val = x; }
