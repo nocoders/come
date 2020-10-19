@@ -1,7 +1,6 @@
 package com.sword.www.leetCode.medium;
 
 import com.sword.www.leetCode.bean.TreeNode;
-import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
