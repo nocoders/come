@@ -12,7 +12,7 @@ public class TreeNode {
     public int val;
     public TreeNode left;
     public TreeNode right;
-    TreeNode(Integer x) { val = x; }
+    public TreeNode(Integer x) { val = x; }
 
     public static TreeNode arrayTransferToNode(Integer[] arrays,int index){
         TreeNode tn = null;
