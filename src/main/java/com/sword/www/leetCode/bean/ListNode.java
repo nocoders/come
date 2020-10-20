@@ -1,6 +1,5 @@
 package com.sword.www.leetCode.bean;
 
-import com.sword.www.leetCode.medium.L_19;
 
 /**
  * TODO
