@@ -21,9 +21,9 @@ package com.sword.www.leetCode.simple;
  */
 public class L_88 {
     public static void main(String[] args) {
-        int[]nums1 = {1,2,3,0,0,0};
-        int[]nums2 = {2,5,6};
-        merge(nums1,3,nums2,3);
+        int[]nums1 = {0};
+        int[]nums2 = {2};
+        merge(nums1,0,nums2,1);
     }
     /**
      * 使用双指针，从后往前 ，把最大的元素放到最后，这样只有两种情况，
@@ -43,6 +43,7 @@ public class L_88 {
         while (p>=0 && q>=0){
             nums1[r--] = nums1[p]>nums2[q] ? nums1[p--] : nums2[q--];
         }
-        System.arraycopy(nums1,0,nums1,0,q+1);
+        System.arraycopy(nums2,0,nums1,0,q+1);
+        System.out.println();
     }
 }
