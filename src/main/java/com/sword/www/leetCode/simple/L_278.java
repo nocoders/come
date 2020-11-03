@@ -1,6 +1,5 @@
 package com.sword.www.leetCode.simple;
 
-import com.sword.www.leetCode.bean.VersionControl;
 
 /**
  * 278. 第一个错误的版本
