@@ -1,8 +1,6 @@
 package com.sword.www.leetCode.medium;
 
-import org.springframework.util.CollectionUtils;
-
-import java.util.*;
+import java.util.Random;
 
 /**
  * 384. 打乱数组
