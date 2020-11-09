@@ -25,7 +25,7 @@ package com.sword.www.leetCode.simple;
 public class L_198 {
 
     public static void main(String[] args) {
-        int [] nums = {1,2,3,1};
+        int [] nums = {1,2,3,-1,2};
         int rob = rob(nums);
         System.out.println();
     }
@@ -34,7 +34,7 @@ public class L_198 {
             return 0;
         }
         int length = nums.length;
-        int tmp[] = new int[length+1];
+        int[] tmp = new int[length+1];
         tmp[0] = 0;
         tmp[1] = nums[0];
         for (int i = 2; i <= length; i++) {
