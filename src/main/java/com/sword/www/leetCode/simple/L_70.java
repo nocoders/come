@@ -29,9 +29,22 @@ package com.sword.www.leetCode.simple;
  * @date 29/10/2020 下午5:15
  */
 public class L_70 {
-    // @TODO giao
-    public int climbStairs(int n) {
 
-        return 0;
+    /**
+     * 下楼梯是典型的斐波那契数列，第n阶上去的方法数量 = 第n-1阶的方法数量 + 第n-2阶的方法数量
+     *
+     * @param n
+     * @author linmeng
+     * @date 12/11/2020 下午3:58
+     * @return int
+     */
+    public int climbStairs(int n) {
+        int f0 = 0,f1 = 1,fn = 0;
+        for (int i = 0; i < n; i++) {
+            fn = f0 + f1;
+            f0 = f1;
+            f1 = fn;
+        }
+        return fn;
     }
 }
