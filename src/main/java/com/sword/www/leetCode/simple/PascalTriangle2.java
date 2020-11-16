@@ -1,7 +1,6 @@
 package com.sword.www.leetCode.simple;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

@@ -1,9 +1,6 @@
 package com.sword.www.leetCode.simple;
 
-import org.springframework.util.CollectionUtils;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
