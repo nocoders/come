@@ -52,9 +52,9 @@ public class L_374 {
             if (guess ==0){
                 return mid;
             }else if (guess<0){
-                first = mid+1;
+                last = mid+1;
             }else {
-                last = mid-1;
+                first = mid-1;
             }
         }
 
