@@ -20,25 +20,22 @@ import com.sword.www.leetCode.bean.TreeNode;
  */
 public class L_108 {
 
-    public static void main(String[] args) {
-        int [] nums = {-10,-3,0,5,9};
-        TreeNode treeNode = sortedArrayToBST(nums);
-        System.out.println();
-    }
-    public static TreeNode sortedArrayToBST(int[] nums) {
+    public TreeNode sortedArrayToBST(int[] nums) {
 
-        return arrayTransferToNode(nums,0,nums.length-1);
+        return arrayTransferToNode(nums,0);
     }
 
-    public static TreeNode arrayTransferToNode(int[] arrays,int left,int right){
-        if (left>right){
-            return null;
+    public static TreeNode arrayTransferToNode(int[] arrays,int index){
+        TreeNode tn = null;
+        if (index < arrays.length){
+            int value = arrays[index];
+            tn = new TreeNode(value);
+            tn.left = arrayTransferToNode(arrays,2*index+1);
+            tn.right = arrayTransferToNode(arrays,2*index+2);
+
+            return tn;
         }
-        int mid = (left+right)/2;
-        TreeNode root = new TreeNode(arrays[mid]);
-        root.left = arrayTransferToNode(arrays,left,mid-1);
-        root.right = arrayTransferToNode(arrays,mid+1,right);
 
-        return root;
+        return tn;
     }
 }
