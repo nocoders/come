@@ -19,21 +19,37 @@ package com.sword.www.leetCode.simple;
 public class L_278{
     private static final int firstBadVersion = 2;
     public static void main(String[] args) {
-        int i = firstBadVersion(3);
+        int i = firstBadVersion(2);
         System.out.println();
     }
     public static int firstBadVersion(int n) {
-        int left = 1,right = n;
-        while (left<right){
-            int mid = left +(right-left)/2;
-            if (isBadVersion(mid)){
-                right = mid;
-            }else {
-                left = mid+1;
+        int l=0,r=n,mid=0;
+        while(l<r){
+            mid = l + (r-l)/2;
+            if(isBadVersion(mid)){
+                r=mid;
+            }else{
+                l=mid+1;
             }
         }
-        return left;
+        if(isBadVersion(r) && !isBadVersion(r-1)){
+            return r;
+        }
+
+        return -1;
     }
+//    public static int firstBadVersion(int n) {
+//        int left = 1,right = n;
+//        while (left<right){
+//            int mid = left +(right-left)/2;
+//            if (isBadVersion(mid)){
+//                right = mid;
+//            }else {
+//                left = mid+1;
+//            }
+//        }
+//        return left;
+//    }
     public static boolean isBadVersion(int version) {
         if (version<firstBadVersion){
             return false;
