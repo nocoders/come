@@ -33,6 +33,17 @@ public class L_20 {
         boolean valid = isValid("([)]");
         System.out.println();
     }
+    /**
+     * 建立一个map，里面以]})为key，[{(为value
+     * 遍历字符串，判断map是否有key，没有的话说明是开始的符号，保存到栈里
+     * 有的话说明是结束的符号，将出栈的数据同map中对应的value判断是否相等，
+     * 不相等返回false，相等返回继续向下执行，直到执行完毕
+     * 执行完毕，如果栈为空说明没问题。
+     * @param s
+     * @author linmeng
+     * @date 2020年12月1日 14:13
+     * @return boolean
+     */
     public static boolean isValid(String s) {
         int n = s.length();
         if (n%2==1){
