@@ -44,7 +44,7 @@ import java.util.Stack;
  */
 public class L_150 {
     public static void main(String[] args) {
-        String [] nums = {"2","1","+","3","*"};
+        String [] nums = {"4","13","5","/","+"};
         int i = evalRPN(nums);
         System.out.println();
     }
@@ -63,13 +63,14 @@ public class L_150 {
                     stack.push(stack.pop() + stack.pop());
                     break;
                 case "-":
-                    stack.push(stack.pop() - stack.pop());
+                    stack.push(-stack.pop() + stack.pop());
                     break;
                 case "*":
                     stack.push(stack.pop() * stack.pop());
                     break;
                 case "/":
-                    stack.push(stack.pop() / stack.pop());
+                    Integer num = stack.pop();
+                    stack.push(stack.pop() / num);
                     break;
                 default:
                     stack.push(Integer.parseInt(str));
