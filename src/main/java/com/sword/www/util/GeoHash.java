@@ -49,13 +49,10 @@ public class GeoHash {
             buffer.append( (lonbits.get(i))?'1':'0');
             buffer.append( (latbits.get(i))?'1':'0');
         }
-        String code = base32(Long.parseLong(buffer.toString(), 2));
-        //Log.i("okunu", "encode  lat = " + lat + "  lng = " + lon + "  code = " + code);
-        return code;
+        return base32(Long.parseLong(buffer.toString(), 2));
     }
 
     public ArrayList<String> getArroundGeoHash(double lat, double lon){
-        //Log.i("okunu", "getArroundGeoHash  lat = " + lat + "  lng = " + lon);
         ArrayList<String> list = new ArrayList<>();
         double uplat = lat + minLat;
         double downLat = lat - minLat;
@@ -90,7 +87,6 @@ public class GeoHash {
         String rightDown = encode(downLat, rightLng);
         list.add(rightDown);
 
-        //Log.i("okunu", "getArroundGeoHash list = " + list.toString());
         return list;
     }
 
