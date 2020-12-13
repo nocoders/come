@@ -108,7 +108,7 @@ public class L_707 {
 
         /** Delete the index-th node in the linked list, if the index is valid. */
         public void deleteAtIndex(int index) {
-            if (index<0 || index>size){
+            if (index<0 || index>=size){
                 return;
             }
             ListNode pred = head;
