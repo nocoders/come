@@ -3,7 +3,7 @@ package com.sword.www.leetCode.medium;
 import com.sword.www.leetCode.bean.ListNode;
 
 /**
- * 删除链表的倒数第N个节点
+ * L_19 删除链表的倒数第N个节点
  * 给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
  *
  * 示例：
@@ -25,6 +25,18 @@ import com.sword.www.leetCode.bean.ListNode;
  * @date 28/9/2020 上午9:01
  */
 public class L_19 {
+    /** 0 1 2 3 4 5
+     * 指定一个空节点，
+     * 指定两个指针，都等于空节点。
+     * 让第二个指针先走n+1步，然后两个指针同时往后走,这样当第二个指针为空的时候，第一个指针正好在倒数n+1个节点上
+     * 这个时候只要把next设置成next.next就可以了
+     *
+     * @param head
+     * @param n
+     * @author linmeng
+     * @date 2020年12月14日 15:56
+     * @return com.sword.www.leetCode.bean.ListNode
+     */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next=head;
