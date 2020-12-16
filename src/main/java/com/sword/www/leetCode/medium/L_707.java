@@ -1,5 +1,7 @@
 package com.sword.www.leetCode.medium;
 
+import com.sword.www.leetCode.bean.ListNode;
+
 /**
  * 707. 设计链表
  * 设计链表的实现。您可以选择使用单链表或双链表。单链表中的节点应该具有两个属性：val 和 next。val 是当前节点的值，next 是指向下一个节点的指针/引用。如果要使用双向链表，则还需要一个属性 prev 以指示链表中的上一个节点。假设链表中的所有节点都是 0-index 的。
@@ -119,13 +121,6 @@ public class L_707 {
             --size;
         }
     }
-    public static class ListNode {
-        int val;
-        ListNode next;
-        ListNode(int x) { val = x; }
-    }
-
-
 /**
  * Your MyLinkedList object will be instantiated and called as such:
  * MyLinkedList obj = new MyLinkedList();
