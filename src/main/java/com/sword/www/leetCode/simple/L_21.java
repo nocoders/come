@@ -30,6 +30,31 @@ public class L_21 {
         ListNode node6 = mergeTwoLists(node, node3);
         System.out.println();
     }
+    public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(0),tmp1 = l1,tmp2 = l2,step = dummy;
+        while (tmp1!=null && tmp2!=null){
+            if (tmp1.val<tmp2.val){
+                step.next = tmp1;
+                tmp1 = tmp1.next;
+            }else {
+                step.next = tmp2;
+                tmp2 = tmp2.next;
+            }
+            step = step.next;
+        }
+        while (tmp1!=null){
+            step.next = tmp1;
+            tmp1 = tmp1.next;
+            step = step.next;
+        }
+        while (tmp2!=null){
+            step.next = tmp2;
+            tmp2 = tmp2.next;
+            step = step.next;
+        }
+
+        return dummy.next;
+    }
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode res = new ListNode(),index = res,tmp1 = l1,tmp2 = l2,surplus;
         if (l1==null && l2==null){
