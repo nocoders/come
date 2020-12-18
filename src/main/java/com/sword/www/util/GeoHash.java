@@ -5,7 +5,7 @@ import java.util.BitSet;
 import java.util.HashMap;
 
 /**
- * TODO
+ * GEOHASH 算法
  *
  * @author linmeng
  * @version 1.0
