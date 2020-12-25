@@ -31,25 +31,35 @@ import java.util.Arrays;
 public class L_28 {
 
     public static void main(String[] args) {
-        String str = "abcdabca";
-        int[] nextArray = getNextArray(str);
+        String str = "abcdabcabcde";
+        int[] nextArray = getNext(str);
         System.out.println(Arrays.toString(nextArray));
     }
     public static int strStr(String haystack, String needle) {
 
         return -1;
     }
-
-    public static int[] getNextArray(String str){
-        int len = str.length();
-        int[] res = new int[len];
-        for (int i = 1,j = 0; i < len; i++) {
-            if (str.charAt(i)==str.charAt(j)){
-                j++;
-                res[i] = j;
+    /**
+     *
+     *
+     * @param ps
+     * @author linmeng
+     * @date 2020年12月21日 16:49
+     * @return int[]
+     */
+    public static int[] getNext(String ps) {
+        char[] p = ps.toCharArray();
+        int[] next = new int[p.length];
+        next[0] = -1;
+        int j = 0;
+        int k = -1;
+        while (j < p.length - 1) {
+            if (k == -1 || p[j] == p[k]) {
+                next[++j] = ++k;
+            } else {
+                k = next[k];
             }
-            j = 0;
         }
-        return res;
+        return next;
     }
 }
