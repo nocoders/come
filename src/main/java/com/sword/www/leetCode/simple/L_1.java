@@ -1,6 +1,7 @@
 package com.sword.www.leetCode.simple;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 两数之和
@@ -20,6 +21,19 @@ public class L_1 {
         System.out.println();
 
 
+    }
+
+    public static int[] twoSum2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+            int num = nums[i];
+            if (map.containsKey(target-num)){
+                return new int[]{i,map.get(target-num)};
+            }
+            map.put(nums[i],i);
+        }
+        return null;
     }
     /**
      * 两数之和，返回 等于target的两数之和的下标

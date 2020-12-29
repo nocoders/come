@@ -37,6 +37,9 @@ import java.util.List;
  * @date 2020年12月25日 14:57
  */
 public class L_706 {
+    public static void main(String[] args) {
+        System.out.println(2^2);
+    }
     class Pair<U, V> {
         public U first;
         public V second;
