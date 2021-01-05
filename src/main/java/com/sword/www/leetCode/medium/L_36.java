@@ -1,9 +1,11 @@
 package com.sword.www.leetCode.medium;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * 有效的数独
+ * 36 有效的数独
  * 判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。
  *
  * 数字 1-9 在每一行只能出现一次。
@@ -29,18 +31,39 @@ public class L_36 {
 
     public static void main(String[] args) {
         char[][] sudo =  {
-                {'8','3','8','.','9','.','.','.','.'},
+                {'5','3','.','.','7','.','.','.','.'},
                 {'6','.','.','1','9','5','.','.','.'},
                 {'.','9','8','.','.','.','.','6','.'},
-                {'.','.','.','.','6','.','.','.','3'},
+                {'8','.','.','.','6','.','.','.','3'},
                 {'4','.','.','8','.','3','.','.','1'},
                 {'7','.','.','.','2','.','.','.','6'},
                 {'.','6','.','.','.','.','2','8','.'},
                 {'.','.','.','4','1','9','.','.','5'},
                 {'.','.','.','.','8','.','.','7','9'}
         };
-        boolean validSudoku = isValidSudoku(sudo);
+        boolean validSudoku = isValidSudoku2(sudo);
         System.out.println();
+    }
+    public static boolean isValidSudoku2(char[][] board) {
+        Set<Integer>[] rows = new HashSet[9],lines = new HashSet[9],boxes = new HashSet[9];
+        for (int i = 0; i < 9; i++) {
+            rows[i] = new HashSet<>();
+            lines[i] = new HashSet<>();
+            boxes[i] = new HashSet<>();
+        }
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                int index = i/3*3 + j/3,num = board[i][j]-'0';
+                if (num>0&&(rows[i].contains(num) || lines[j].contains(num) || boxes[index].contains(num))){
+                    return false;
+                }
+                rows[i].add(num);
+                lines[j].add(num);
+                boxes[index].add(num);
+            }
+        }
+
+        return true;
     }
     /**
      * 判断数独中已经存在的数字是否有效：同行，同列以及在3X3的方格中都是唯一。
@@ -48,7 +71,9 @@ public class L_36 {
      *  定义三个map数组 ，分别存储同行，同列，3X3方格中的元素，
      *  先判断这三个数组中包不包括遍历所在元素，包括直接返回false，不包括就把该元素加入以上数组的元素中
      *  注：重点是判断元素所在的子数独（3X3方格）在map数组中的角标：(row / 3) * 3 + columns / 3
-     *
+     * 20210105 又一次做这个题，还是没有思路，更可悲的是原来的代码也看不太懂了，看了会才看懂
+     *          感觉之前写的有点问题，之前是按照每行，每列，每个方块进行保存，保存的是个array[map]，key代表的是行、列、方块，value是出现的次数
+     *          感觉出现的次数这个保存没意义，可以改成set
      * @param board
      * @author linmeng
      * @date 2020/8/5 15:12
