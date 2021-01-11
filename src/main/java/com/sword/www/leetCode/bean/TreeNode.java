@@ -13,7 +13,11 @@ public class TreeNode {
     public TreeNode left;
     public TreeNode right;
     public TreeNode(Integer x) { val = x; }
-
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
     public static TreeNode arrayTransferToNode(Integer[] arrays,int index){
         TreeNode tn = null;
         if (index < arrays.length){
