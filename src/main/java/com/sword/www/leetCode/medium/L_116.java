@@ -1,7 +1,5 @@
 package com.sword.www.leetCode.medium;
 
-import com.sword.www.leetCode.bean.TreeNode;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
