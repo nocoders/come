@@ -1,7 +1,7 @@
 package com.sword.www.leetCode.simple;
 
 /**
- * 删除排序数组中的重复项
+ * 26 删除排序数组中的重复项
  *给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
  *
  * 不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
@@ -13,8 +13,26 @@ public class L_26 {
 
     public static void main(String[] args) {
         int[] nums = {1,1,2,3,4,4,5};
-        int i = removeDuplicates(nums);
+        int i = removeDuplicatesFx(nums);
         System.out.println(i);
+    }
+
+    /**
+     * 同之前移除重复元素不同，之前移除元素是判断同对应val不相等，就把下一个元素进行覆盖
+     *
+     * @param nums
+     * @author linmeng
+     * @date 2021年2月22日 09:44
+     * @return int
+     */
+    public static int removeDuplicatesFx(int[] nums) {
+        int length=nums.length,j=0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i]!=nums[j]){
+                nums[++j]=nums[i];
+            }
+        }
+        return j;
     }
     /**
      * 原地修改数组，并返回数组的新长度 。
