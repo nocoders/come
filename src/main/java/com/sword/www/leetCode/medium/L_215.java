@@ -30,7 +30,7 @@ public class L_215 {
     public static void main(String[] args) {
         int[] nums = {3,2,1,5,6,4};
         int kthLargest = findKthLargest2(nums, 2);
-        System.out.println();
+        System.out.println(kthLargest);
     }
     /**
      * 使用最笨的方法，排序
@@ -45,35 +45,42 @@ public class L_215 {
         return nums[nums.length-k];
     }
 
+    /**
+     * 使用快速排序算法，对数组进行分区，分区后判断第K个元素在哪一区，然后再对该区进行分区
+     * @param nums
+     * @param k
+     * @author linmeng
+     * @date 2021年3月23日 15:31
+     * @return int
+     */
     public static int findKthLargest2(int[] nums, int k) {
-        return quickSelect(nums, 0, nums.length - 1, nums.length - k);
+            return quickSelect(nums, 0, nums.length - 1, nums.length - k);
     }
 
-    public static int quickSelect(int[] a, int l, int r, int index) {
-        int q = randomPartition(a, l, r);
-        if (q == index) {
-            return a[q];
-        } else {
-            return q < index ? quickSelect(a, q + 1, r, index) : quickSelect(a, l, q - 1, index);
+    private static int quickSelect(int[] nums, int l, int r, int k) {
+        int index = partition(nums,l,r);
+
+        if (index==k){
+            return nums[index];
+        }else {
+            return index < k ? quickSelect(nums, index + 1, r, k) : quickSelect(nums, l, index - 1, k);
         }
     }
 
-    public static int randomPartition(int[] a, int l, int r) {
-        int i = random.nextInt(r - l + 1) + l;
-        swap(a, i, r);
-        return partition(a, l, r);
-    }
-
-    public static int partition(int[] a, int l, int r) {
-        int x = a[r], i = l - 1;
-        for (int j = l; j < r; ++j) {
-            if (a[j] <= x) {
-                swap(a, ++i, j);
+    private static int partition(int[] nums, int l, int r) {
+        int x=random.nextInt(r-l+1)+l;
+        swap(nums,x,r);
+        int i=l-1,val = nums[r];
+        for (int j = l; j < r; j++) {
+            if (nums[j]<val){
+                swap(nums,++i,j);
             }
         }
-        swap(a, i + 1, r);
-        return i + 1;
+        swap(nums,i+1,r);
+
+        return i+1;
     }
+
 
     public static void swap(int[] a, int i, int j) {
         int temp = a[i];
