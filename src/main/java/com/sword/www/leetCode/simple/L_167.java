@@ -18,7 +18,7 @@ package com.sword.www.leetCode.simple;
 public class L_167 {
     public static void main(String[] args) {
         int [] numbers = {2, 7, 11, 15};
-        int[] ints = twoSum(numbers, 9);
+        int[] ints = twoSum2(numbers, 9);
         System.out.println();
     }
     public static int[] twoSum(int[] numbers, int target) {
@@ -70,4 +70,27 @@ public class L_167 {
 //        }
 //        return res;
 //    }
+
+    /**
+     * 使用双指针，一个最小，一个最大.两者的和小于target就让左边的指针右移，大于target就让右边的指针左移
+     *
+     * @param numbers
+     * @param target
+     * @author linmeng
+     * @date 2021年3月26日 09:11
+     * @return int[]
+     */
+    public static int[] twoSum2(int[] numbers, int target) {
+        int length = numbers.length,i=0,j=length-1;
+        while (i<j){
+            int sum = numbers[i] + numbers[j];
+            if (sum ==target){
+                return new int[]{i+1,j+1};
+            }else if (sum<target){
+                i++;
+            }else j--;
+        }
+        return null;
+    }
+
 }
