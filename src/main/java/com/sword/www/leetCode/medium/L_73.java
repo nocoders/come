@@ -38,8 +38,9 @@ public class L_73 {
     }
     /**
      * 把等于0的行和列都变成0
-     * 用两个set保存等于0的行和列，遍历数组，判断该数组有没有在set中，没有的话等于0就 添加到set中
-     *
+     * 用两个set保存等于0的行和列，遍历一次数组，等于0的话行列角标保存到set中
+     * 再遍历一次，判断行列是否在set中，在的话把该行该列置零
+     * update 使用标记数组，遍历一次保存等于0的，再遍历一次，判断是否在标记数组中，在的话就置零
      * @param matrix
      * @author linmeng
      * @date 2021年3月28日 21:03
@@ -47,27 +48,20 @@ public class L_73 {
      */
     public static void setZeroes(int[][] matrix) {
         int rowLength = matrix.length,lineLength = matrix[0].length;
-        HashSet<Integer> rowSet = new HashSet<>(rowLength);
-        HashSet<Integer> lineSet = new HashSet<>(lineLength);
+        boolean[] rows = new boolean[rowLength];
+        boolean[] lines = new boolean[lineLength];
         for (int i = 0; i < rowLength; i++) {
             for (int j = 0; j < lineLength; j++) {
                 if (matrix[i][j] == 0) {
-                    rowSet.add(i);
-                    lineSet.add(j);
+                    rows[i]=true;
+                    lines[j]=true;
                 }
             }
         }
         for (int i = 0; i < rowLength; i++) {
-            if (rowSet.contains(i)) {
-                for (int k = 0; k < lineLength; k++) {
-                    matrix[i][k]=0;
-                }
-            }
             for (int j = 0; j < lineLength; j++) {
-                if (lineSet.contains(j)){
-                    for (int k = 0; k < rowLength; k++) {
-                        matrix[k][j]=0;
-                    }
+                if (rows[i]||lines[j]){
+                    matrix[i][j]=0;
                 }
 
             }
