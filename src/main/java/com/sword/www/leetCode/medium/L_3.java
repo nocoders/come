@@ -39,7 +39,7 @@ import java.util.HashMap;
  */
 public class L_3 {
     public static void main(String[] args) {
-        String s = "abcabcbb";
+        String s = "abcabcde";
         int i = lengthOfLongestSubstring(s);
         System.out.println();
     }
@@ -68,5 +68,30 @@ public class L_3 {
         }
 
         return res;
+    }
+
+    /**
+     * 双指针，使用map保存字符跟角标，当字符包含在map中时，判断角标是否在两个指针中间，在的话就更新左边角标
+     * @param s
+     * @author linmeng
+     * @date 2021年3月29日 08:53
+     * @return int
+     */
+    public static int lengthOfLongestSubstring2(String s) {
+        char[] chars = s.toCharArray();
+        int length = chars.length,res=0, i = 0,j=0;
+        HashMap<Character, Integer> map = new HashMap<>(length);
+        for (; j < length; j++) {
+            char c = chars[j];
+            if (map.containsKey(c)){
+                // 包含直接替换
+                i=Math.max(i,map.get(c));
+            }
+            // 加一是为了下次如果包含该key的话，就直接用就好了，不然的话会跟后面的key重复
+            map.put(c,j+1);
+            res=Math.max(res,j-i+1);
+        }
+        // 这个地方没必要再加一次，因为当循环到最后的时候，j最后会多加1导致数据不准确
+        return res;//Math.max(res,j-i+1)
     }
 }
