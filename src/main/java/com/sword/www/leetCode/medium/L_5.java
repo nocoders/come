@@ -11,7 +11,7 @@ public class L_5 {
     public static void main(String[] args) {
 //        System.out.println("123321".substring(0,3));
 //        System.out.println("123".substring(1,2));
-        String s = longestPalindrome("123321");
+        String s = longestPalindrome3("123321");
         System.out.println();
     }
     /**
@@ -118,7 +118,8 @@ public class L_5 {
             i--;
             j++;
         }
-        return j-i+1;
+        // 这个地方应该减一，因为上面i-- j++ 多了两个，然后再加一正好
+        return j-i-1;
     }
 
 }
