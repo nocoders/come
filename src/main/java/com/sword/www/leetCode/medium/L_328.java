@@ -33,7 +33,7 @@ public class L_328 {
         node2.next = node3;
         node3.next = node4;
         ListNode node = oddEvenList(head);
-        System.out.printf("");
+        System.out.print("");
     }
     /**
      * 一个代表奇数节点指针，一个代表偶数节点指针.
@@ -57,6 +57,30 @@ public class L_328 {
             even = even.next;
         }
         odd.next = evenhead;
+
+        return head;
+    }
+
+    /**
+     * 奇偶链表分离法
+     * 主要是将链表中的奇数跟偶数分为两个链表，然后再把两个链表链接
+     * @param head
+     * @author linmeng
+     * @date 2021年3月30日 20:57
+     * @return com.sword.www.leetCode.bean.ListNode
+     */
+    public static ListNode oddEvenList2(ListNode head) {
+        if (head==null){
+            return null;
+        }
+        ListNode odd=head,even=head.next,evenhead=even;
+        while (even!=null && even.next!=null){
+            odd.next=even.next;
+            odd=odd.next;
+            even.next=odd.next;
+            even=even.next;
+        }
+        odd.next=evenhead;
 
         return head;
     }
