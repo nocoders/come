@@ -61,4 +61,46 @@ public class L_160 {
 
         return node1;
     }
+    /**
+     * 相交链表，
+     *      循环两个链表，条件为两个链表有一个不为空。
+     *      使用step，node1不为空-1，node2不为空+1
+     *      判断哪个长，长的那个先走几步
+     *      之后进行遍历，获取相同节点
+     * @param headA
+     * @param headB
+     * @author linmeng
+     * @date 2021年3月30日 23:04
+     * @return com.sword.www.leetCode.bean.ListNode
+     */
+    public ListNode getIntersectionNode2(ListNode headA, ListNode headB) {
+        ListNode node1=headA,node2=headB;
+        int step=0;
+        while (node1!=null||node2!=null){
+            if (node1!=null){
+                node1=node1.next;
+                step--;
+            }
+            if (node2!=null){
+                node2=node2.next;
+                step++;
+            }
+        }
+        node1=headA;
+        node2=headB;
+        while (step>0){
+            node2=node2.next;
+            step--;
+        }
+        while (step<0){
+            node1=node1.next;
+            step++;
+        }
+        while (node1!=node2 && node1!=null && node2!=null){
+            node1=node1.next;
+            node2=node2.next;
+        }
+
+        return node1;
+    }
 }
