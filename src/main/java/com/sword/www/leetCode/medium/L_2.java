@@ -80,4 +80,41 @@ public class L_2 {
 
         return head.next;
     }
+
+    /**
+     * 复习：两个非空链表，两个非负整数，逆序存储
+     *  定义一个变量保存大于10的数，当有一个链表为空时，单独遍历另外一个链表
+     *
+     * @param l1
+     * @param l2
+     * @author linmeng
+     * @date 2021年3月30日 20:05
+     * @return com.sword.www.leetCode.bean.ListNode
+     */
+    public ListNode addTwoNumbers3(ListNode l1, ListNode l2) {
+        ListNode res = new ListNode(0),head1=l1,head2=l2,resNode=res;
+        int carry=0;
+        while (head1!=null && head2!=null){
+            int val = head1.val + head2.val+carry;
+            resNode.next=new ListNode(val%10);
+            carry=val/10;
+            resNode=resNode.next;
+            head1=head1.next;
+            head2=head2.next;
+        }
+        if (head1!=null ||head2!=null){
+            ListNode node = head1==null?head2:head1;
+           while (node!=null){
+               resNode.next=new ListNode((node.val+carry)%10);
+               carry=(node.val+carry)/10;
+               resNode=resNode.next;
+               node=node.next;
+           }
+        }
+        if (carry>0){
+            resNode.next=new ListNode(carry);
+        }
+
+        return res.next;
+    }
 }
