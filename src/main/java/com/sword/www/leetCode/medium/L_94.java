@@ -2,10 +2,7 @@ package com.sword.www.leetCode.medium;
 
 import com.sword.www.leetCode.bean.TreeNode;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 94. 二叉树的中序遍历
@@ -86,5 +83,53 @@ public class L_94 {
         inOrder(res,node.left);
         res.add(node.val);
         inOrder(res, node.right);
+    }
+    /**
+     * 递归遍历:从根节点开始，递归遍历左子树，然后把val保存到list，递归遍历右子树。子子孙孙无穷尽也。
+     * @param root
+     * @author linmeng
+     * @date 2021年3月30日 23:24
+     * @return java.util.List<java.lang.Integer>
+     */
+    public List<Integer> inorderTraversalFx(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        inOrderDg(res,root);
+        return res;
+    }
+
+    private void inOrderDg(ArrayList<Integer> res, TreeNode node) {
+        if (node==null){
+            return;
+        }
+        inOrderDg(res,node.left);
+        res.add(node.val);
+        inOrderDg(res,node.right);
+    }
+
+    /**
+     * 迭代遍历：使用栈（后进先出）遍历保存所有左子树，出栈，保存val，然后令节点等于右节点
+     *
+     * @param root
+     * @author linmeng
+     * @date 2021年3月30日 23:33
+     * @return java.util.List<java.lang.Integer>
+     */
+    public List<Integer> inorderTraversalFx2(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        if (root==null){
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode node = root;
+        while (!stack.empty() || node!=null){
+            while (node!=null){
+                stack.push(node);
+                node=node.left;
+            }
+            node=stack.pop();
+            res.add(node.val);
+            node=node.right;
+        }
+        return res;
     }
 }
