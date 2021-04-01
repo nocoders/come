@@ -64,4 +64,42 @@ public class L_105 {
 
         return node;
     }
+
+    /**
+     * 根据前序遍历中序遍历获取二叉树
+     *      使用map保存中序遍历的数组的角标跟值
+     *      前序遍历可以获取到头结点，去map里面获取中序遍历数组的角标，初始化当前节点
+     *      根据中序遍历角标可以获取到当前节点左右子树的长度
+     *      递归获取左右子树
+     * @param preorder
+     * @param inorder
+     * @author linmeng
+     * @date 2021年3月31日 22:09
+     * @return com.sword.www.leetCode.bean.TreeNode
+     */
+    public static TreeNode buildTreeFx(int[] preorder, int[] inorder) {
+        if (preorder==null || inorder==null){
+            return null;
+        }
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i],i);
+        }
+       return buildTreeFx(preorder,0,preorder.length-1,inorder,0,inorder.length-1,map);
+    }
+
+    private static TreeNode buildTreeFx(int[] preorder, int preLeft, int preRight, int[] inOrder,int inLeft, int inRight, HashMap<Integer, Integer> map) {
+        if (preLeft>preRight || inLeft>inRight){
+            return null;
+        }
+        int val = preorder[preLeft];
+        Integer index = map.get(val);
+        TreeNode node = new TreeNode(val);
+        int leftLen = index-inLeft,rightLen = inRight-index;
+
+        node.left=buildTreeFx(preorder,preLeft+1,preLeft+leftLen,inOrder,inLeft,index-1,map);
+        node.right=buildTreeFx(preorder,preLeft+leftLen+1,preRight,inOrder,index+1,inRight,map);
+
+        return node;
+    }
 }
