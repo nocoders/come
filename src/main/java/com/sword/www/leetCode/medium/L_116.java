@@ -31,19 +31,21 @@ import java.util.Queue;
  */
 public class L_116 {
     public static void main(String[] args) {
-        Integer[] nodes = new Integer[]{1,2,3,4,5,6,7};
+        Integer[] nodes = new Integer[]{1, 2, 3, 4, 5, 6, 7};
         Node node = new Node();
         Node node1 = node.arrayTransferToNode(nodes, 0);
-        Node connect = connect(node1);
+        Node connect = connectFx(node1);
         System.out.println();
     }
+
     static class Node {
         public int val;
         public Node left;
         public Node right;
         public Node next;
 
-        public Node() {}
+        public Node() {
+        }
 
         public Node(int _val) {
             val = _val;
@@ -55,16 +57,17 @@ public class L_116 {
             right = _right;
             next = _next;
         }
-        public Node arrayTransferToNode(Integer[] arrays, int index){
+
+        public Node arrayTransferToNode(Integer[] arrays, int index) {
             Node tn = null;
-            if (index < arrays.length){
+            if (index < arrays.length) {
                 Integer value = arrays[index];
-                if (value == null){
+                if (value == null) {
                     return null;
                 }
                 tn = new Node(value);
-                tn.left = arrayTransferToNode(arrays,2*index+1);
-                tn.right = arrayTransferToNode(arrays,2*index+2);
+                tn.left = arrayTransferToNode(arrays, 2 * index + 1);
+                tn.right = arrayTransferToNode(arrays, 2 * index + 2);
 
                 return tn;
             }
@@ -72,28 +75,91 @@ public class L_116 {
             return tn;
         }
     }
+
     public static Node connect(Node root) {
-        if (root==null){
+        if (root == null) {
             return null;
         }
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
         int size = queue.size();
-        while (!queue.isEmpty()){
-            while (size>0){
+        while (!queue.isEmpty()) {
+            while (size > 0) {
                 Node node = queue.poll();
-                if (size-1>0){
-                    node.next=queue.peek();
+                if (size - 1 > 0) {
+                    node.next = queue.peek();
                 }
-                if (node.left!=null){
+                if (node.left != null) {
                     queue.add(node.left);
                 }
-                if (node.right!=null){
+                if (node.right != null) {
                     queue.add(node.right);
                 }
                 size--;
             }
             size = queue.size();
+        }
+        return root;
+    }
+
+    /**
+     * 将每行的节点使用next指针连接
+     * 使用队列保存每行元素，然后进行连接
+     *
+     * @param root
+     * @return com.sword.www.leetCode.medium.L_116.Node
+     * @author linmeng
+     * @date 2021年4月1日 22:05
+     */
+    public static Node connectFx(Node root) {
+        if (root == null) {
+            return null;
+        }
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        int size = queue.size();
+        while (!queue.isEmpty()) {
+            for (int i = 0; i < size; i++) {
+                Node n = queue.poll();
+                if (n != null) {
+                    if (size - i > 1) {
+                        n.next = queue.peek();
+                    }
+                    if (n.left != null) {
+                        queue.offer(n.left);
+                        queue.offer(n.right);
+
+                    }
+                }
+            }
+            size = queue.size();
+        }
+        return root;
+    }
+    /**
+     * 空间复杂度O(1)解法：
+     *      遍历本层节点，将下层节点使用next连接
+     *      node.left.next = node.right
+     *      node.right.next = node.next.left
+     *      node=node.next
+     * @param root
+     * @author linmeng
+     * @date 2021年4月1日 22:31
+     * @return com.sword.www.leetCode.medium.L_116.Node
+     */
+    public static Node connectFx2(Node root) {
+        Node leftMost = root;
+        // 在外成判断是否有下一层，因为内层循环是给下一层设置指针的
+        while (leftMost.left!=null){
+            Node head = leftMost;
+            while (head!=null){
+                head.left.next=head.right;
+                if (head.next!=null){
+                    head.right.next=head.next.left;
+                }
+                head=head.next;
+            }
+            leftMost=leftMost.left;
         }
         return root;
     }
