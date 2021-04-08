@@ -47,6 +47,39 @@ public class L_200 {
         System.out.println();
     }
 
+    /**
+     * 深度遍历：遍历数组，等于1的话就深度遍历将周围等于1的全都置为0
+     *
+     * @param grid
+     * @author linmeng
+     * @date 2021年4月7日 22:12
+     * @return int
+     */
+    public static int numIslandsFxDfs(char[][] grid) {
+        int row = grid.length,line = grid[0].length,res=0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < line; j++) {
+                if (grid[i][j]=='1'){
+                    res++;
+                    dfsFx(grid,i,j);
+                }
+            }
+        }
+
+        return res;
+    }
+
+    private static void dfsFx(char[][] grid, int i, int j) {
+        if (i<0||i==grid.length || j<0 || j==grid[0].length || grid[i][j]=='0'){
+            return;
+        }
+        grid[i][j]='0';
+        dfsFx(grid,i-1,j);
+        dfsFx(grid,i+1,j);
+        dfsFx(grid,i,j-1);
+        dfsFx(grid,i,j+1);
+    }
+
     public static int numIslands2(char[][] grid) {
         if (grid == null || grid.length == 0) {
             return 0;
