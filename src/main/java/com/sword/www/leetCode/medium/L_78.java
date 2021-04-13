@@ -58,6 +58,13 @@ public class L_78 {
         }
         return res;
     }
+    /**
+     * 第二种递归写法，从尾部开始，第n个的子集等于所有的n-1的子集 加上n-1的子集加第n个元素的集合
+     * @param nums
+     * @author linmeng
+     * @date 2021年4月13日 19:13
+     * @return java.util.List<java.util.List<java.lang.Integer>>
+     */
     public static List<List<Integer>> subsetsDg(int[] nums) {
 
         return recurse(nums.length,nums);
