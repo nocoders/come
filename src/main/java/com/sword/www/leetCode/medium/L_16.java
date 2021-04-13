@@ -58,4 +58,28 @@ public class L_16 {
             }
         }
     }
+
+    public List<List<Integer>> permuteFx(int[] nums) {
+        ArrayList<List<Integer>> res = new ArrayList<>();
+        if (nums==null || nums.length==0){
+            return res;
+        }
+       backTrackFx(res,nums,0,nums.length-1,new LinkedList<Integer>());
+
+        return res;
+    }
+
+    private void backTrackFx(ArrayList<List<Integer>> res,int[] nums, int i, int length, LinkedList<Integer> list) {
+        if (i==length){
+            res.add(list);
+        }
+        for (int j = i; j < length; j++) {
+            if (list.contains(nums[j])){
+                continue;
+            }
+            list.add(nums[j]);
+            backTrackFx(res, nums, i+1, length, list);
+            list.removeLast();
+        }
+    }
 }
