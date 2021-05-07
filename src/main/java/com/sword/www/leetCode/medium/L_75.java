@@ -31,8 +31,8 @@ package com.sword.www.leetCode.medium;
 public class L_75 {
 
     public static void main(String[] args) {
-        int[]nums = new int[]{0,1,2,0,1,2,2,1,0};
-        sortColors3(nums);
+        int[]nums = new int[]{2,0,1};
+        sortColorsFx(nums);
         System.out.println();
     }
     /**
@@ -93,7 +93,7 @@ public class L_75 {
             }
         }
     }
-    private void swap(int i, int index, int[] nums) {
+    private static void swap(int i, int index, int[] nums) {
         int tmp = nums[i];
         nums[i]=nums[index];
         nums[index]=tmp;
@@ -123,6 +123,37 @@ public class L_75 {
                 nums[p0]=nums[i];
                 nums[i]=tmp;
                 p0++;
+            }
+        }
+    }
+
+    /**
+     * 问题：将0,1,2 进行排序
+     * 解决1：直接使用Arrays.sort 方法
+     * 解决2：定义一个指针指向数组头部，遍历两次数组，
+     *      第一次将等于0的元素同指针所在元素进行替换，
+     *      第二次将等于1的元素同指针所在元素进行替换
+     * 解决3：定义两个指针，一个指向数组头部，一个指向数组尾部
+     *      遍历数组，若元素等于0，则同第一个指针进行替换，若元素等于2，则同第二个指针进行替换
+     *      当元素等于0时，被替换的元素肯定不是0或2，因为被替换的角标已经被遍历过了。
+     *      当元素等于2时，被替换的元素有可能等于0或2，这个时候遍历角标减一
+     * @param nums 需排序数组
+     * @author linmeng
+     * @date 2021年5月7日 15:38
+     * @return void
+     */
+    public static void sortColorsFx(int[] nums) {
+        int length = nums.length,left=0,right=length-1;
+        for (int i = 0; i <= right; i++) {
+            if (nums[i]==0){
+                swap(i,left++,nums);
+                continue;
+            }
+            if (nums[i]==2){
+                swap(i,right--,nums);
+                if (nums[i]==2 || nums[i]==0){
+                    i--;
+                }
             }
         }
     }
