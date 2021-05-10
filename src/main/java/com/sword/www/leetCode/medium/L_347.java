@@ -1,10 +1,8 @@
 package com.sword.www.leetCode.medium;
 
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 347. 前 K 个高频元素
@@ -27,7 +25,7 @@ import java.util.PriorityQueue;
 public class L_347 {
     public static void main(String[] args) {
         int[] ints = {1, 1, 1, 2, 2, 3};
-        int[] ints1 = topKFrequent(ints, 2);
+        int[] ints1 = topKFrequentFx(ints, 2);
         System.out.println();
     }
     /**
@@ -63,5 +61,47 @@ public class L_347 {
             res[i]=queue.poll()[0];
         }
         return res;
+    }
+    
+    /**
+     * 使用{@link java.util.TreeMap<Integer,Integer>}保存各元素数量
+     * @param nums
+     * @param k
+     * @author linmeng
+     * @date 2021年5月7日 17:17
+     * @return int[]
+     */
+    public static int[] topKFrequentFx(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+        PriorityQueue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt( o ->o[1]));
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (queue.size()==k){
+                int[] ints = queue.poll();
+                queue.add(ints[1]>entry.getValue()?ints:new int[]{entry.getKey(),entry.getValue()});
+            }else {
+                queue.add(new int[]{entry.getKey(),entry.getValue()});
+            }
+        }
+        Integer [] res = new Integer[k];
+
+        return queue.stream().mapToInt(a->a[0]).toArray();
+    }
+    /**
+     * 
+     * 直接使用lambda表达式解决
+     * @param nums
+     * @param k 
+     * @author linmeng
+     * @date 2021年5月10日 21:30 
+     * @return int[]
+     */
+    public static int[] topKFrequentFx2(int[] nums, int k) {
+
+        return Arrays.stream(nums).boxed().collect(Collectors.groupingBy(e->e,Collectors.counting()))
+                .entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(k).mapToInt(Map.Entry::getKey).toArray();
     }
 }
