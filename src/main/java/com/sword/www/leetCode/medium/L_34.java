@@ -18,8 +18,8 @@ package com.sword.www.leetCode.medium;
 public class L_34 {
 
     public static void main(String[] args) {
-        int [] nums = {1,2,3};
-        int[] ints = searchRange(nums, 2);
+        int [] nums = {5,7,7,8,8,10};
+        int[] ints = searchRangeFx(nums, 0);
 
         System.out.println();
     }
@@ -60,5 +60,33 @@ public class L_34 {
         }
 
         return -1;
+    }
+
+    public static int[] searchRangeFx(int[] nums, int target) {
+        int[] res = {-1,-1};
+
+        int length = nums.length,mid,left=-1;
+        if (length==0){
+            return res;
+        }
+        int l = 0,r=length-1;
+        while(l<r){
+            mid = l +(r-l)/2;
+            if(nums[mid]>=target){
+                r=mid;
+            }else{
+                l=mid+1;
+            }
+        }
+
+        if(nums[r]==target){
+            left=r;
+            while(r+1<length &&nums[r+1]==target){
+                r++;
+            }
+            res = new int[] {left,r};
+        }
+
+        return res;
     }
 }

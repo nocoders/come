@@ -43,4 +43,29 @@ public class L_162 {
         }
         return length-1;
     }
+
+    /**
+     * 二分法获取峰值，获取中间元素，判断中间元素同右边元素大小，若比他大，就往右边寻找，否则往左边寻找
+     * 直到左边元素等于右边元素就返回
+     *
+     * @param nums
+     * @author linmeng
+     * @date 2021年5月10日 21:59
+     * @return int
+     */
+    public int findPeakElementFx(int[] nums) {
+        int length = nums.length;
+         return search(nums,0,length-1);
+    }
+
+    private int search(int[] nums, int l, int r) {
+        if (l==r){
+            return l;
+        }
+        int mid =(l+r)/2;
+        if (nums[mid]<nums[mid+1]){
+            return search(nums,mid+1,r);
+        }
+        return search(nums,l,mid);
+    }
 }
