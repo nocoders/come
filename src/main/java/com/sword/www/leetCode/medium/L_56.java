@@ -1,7 +1,9 @@
 package com.sword.www.leetCode.medium;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
 * @Description:    leetCode 56 重叠区间合并
@@ -15,7 +17,7 @@ import java.util.Comparator;
 public class L_56 {
     public static void main(String[] args) {
         int [][] a = {{1,3},{2,6},{8,10},{15,18}};
-        int[][] merge = merge(a);
+        int[][] merge = mergeFx(a);
         System.out.println();
     }
     /**
@@ -49,5 +51,25 @@ public class L_56 {
             res[i]= intervals[i];
         }
         return res;
+    }
+    public static int[][] mergeFx(int[][] intervals) {
+        Arrays.sort(intervals,Comparator.comparingInt(a->a[0]));
+        int length = intervals.length;
+        int [] tmp = new int[2];
+        List<int[]> ints = new ArrayList<>();
+        for(int i=1,j=0;i<length;){
+             tmp=intervals[j];
+            while(i<length && tmp[1]>=intervals[i][0]){
+                tmp[1]=intervals[i][1];
+                i++;
+            }
+            ints.add(tmp);
+            j=i++;
+        }
+        if (tmp[1]<intervals[length-1][0]){
+            ints.add(intervals[length-1]);
+        }
+        int[][] res = new int[ints.size()][2];
+        return ints.toArray(res);
     }
 }
